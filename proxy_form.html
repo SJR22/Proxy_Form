@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Доверенность</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+  h2 { text-align: center; }
+  label { display: block; margin-top: 10px; font-weight: bold; }
+  input { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+  button {
+    background: #0088cc; color: white; border: none; padding: 10px;
+    margin-top: 20px; width: 100%; font-size: 16px; cursor: pointer;
+  }
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <h2>Заполните доверенность</h2>
+  <form id="proxyForm">
+    <label>Номер заказа <input name="order_number" required></label>
+    <label>Дата заказа <input name="order_date" type="date" required></label>
+    <label>ФИО плательщика <input name="payer_name" required></label>
+    <label>Тел. плательщика <input name="payer_phone" required></label>
+    <label>Паспорт плательщика <input name="payer_passport" required></label>
+    <label>Email <input name="email" type="email" required></label>
+    <label>ФИО получателя <input name="recipient_name" required></label>
+    <label>Тел. получателя <input name="recipient_phone" required></label>
+    <label>Паспорт получателя <input name="recipient_passport" required></label>
+    <label>Сумма <input name="amount" required></label>
+    <label>Домашний адрес <input name="Home_address"></label>
+    <label>Адрес ТК <input name="Address_TC"></label>
+    <label>Название ТК <input name="Name_TC"></label>
+    <button type="submit">Отправить</button>
+  </form>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  document.getElementById("proxyForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = {};
+    new FormData(this).forEach((value, key) => data[key] = value);
+    tg.sendData(JSON.stringify(data)); // Отправляем данные боту
+    tg.close();
+  });
+</script>
+</body>
+</html>
