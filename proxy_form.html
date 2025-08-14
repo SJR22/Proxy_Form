@@ -43,9 +43,11 @@
     e.preventDefault();
     const data = {};
     new FormData(this).forEach((value, key) => data[key] = value);
-    tg.sendData(JSON.stringify(data)); // Отправляем данные боту
+    tg.sendData(JSON.stringify(data));
+    setTimeout(() => tg.close(), 100);
     tg.close();
   });
 </script>
 </body>
 </html>
+
